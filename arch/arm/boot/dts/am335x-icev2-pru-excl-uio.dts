@@ -613,3 +613,4 @@
 		 reg = <3>;
 	 };
 };
+#include "am335x-pru-uio.dtsi"
