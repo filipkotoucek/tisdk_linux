@@ -253,35 +253,35 @@
             //0xfc ( PIN_OUTPUT | MUX_MODE5 ) /* (G16) mmc0_dat0.pr1_pru0_pru_r30[11] */
             //0x100 ( PIN_OUTPUT | MUX_MODE5 ) /* (G17) mmc0_clk.pr1_pru0_pru_r30[12] */
             //0x104 ( PIN_OUTPUT | MUX_MODE5 ) /* (G18) mmc0_cmd.pr1_pru0_pru_r30[13] */
-            //0x30 ( PIN_OUTPUT | MUX_MODE6 ) /* (T12) gpmc_ad12.pr1_pru0_pru_r30[14] */
-            //0x34 ( PIN_OUTPUT | MUX_MODE6 ) /* (R12) gpmc_ad13.pr1_pru0_pru_r30[15] */
+            0x30 ( PIN_OUTPUT | MUX_MODE6 ) /* (T12) gpmc_ad12.pr1_pru0_pru_r30[14] */
+            0x34 ( PIN_OUTPUT | MUX_MODE6 ) /* (R12) gpmc_ad13.pr1_pru0_pru_r30[15] */
             /*0x38 ( PIN_INPUT | MUX_MODE6 )*/ /* (V13) gpmc_ad14.pr1_pru0_pru_r31[14] */
             /*0x3c ( PIN_INPUT | MUX_MODE6 )*/ /* (U13) gpmc_ad15.pr1_pru0_pru_r31[15] */
-            //0x1b4 ( PIN_INPUT | MUX_MODE5 ) /* (D14) xdma_event_intr1.pr1_pru0_pru_r31[16] */
+            0x1b4 ( PIN_INPUT | MUX_MODE5 ) /* (D14) xdma_event_intr1.pr1_pru0_pru_r31[16] */
         >;
     };
-/*
+
     pru_stepper_pins_gpio: pru_pruss11_pins {
         pinctrl-single,pins = <
-            0x190 ( PIN_OUTPUT | MUX_MODE7 ) // (A13) mcasp0_aclkx.pr1_pru0_pru_r30[0] 
-            0x194 ( PIN_OUTPUT | MUX_MODE7 ) // (B13) mcasp0_fsx.pr1_pru0_pru_r30[1] 
-            0x198 ( PIN_OUTPUT | MUX_MODE7 ) // (D12) mcasp0_axr0.pr1_pru0_pru_r30[2] 
-            0x19c ( PIN_OUTPUT | MUX_MODE7 ) // (C12) mcasp0_ahclkr.pr1_pru0_pru_r30[3] 
-            0x1a0 ( PIN_OUTPUT | MUX_MODE7 ) // (B12) mcasp0_aclkr.pr1_pru0_pru_r30[4] 
-            0x1a4 ( PIN_OUTPUT | MUX_MODE7 ) // (C13) mcasp0_fsr.pr1_pru0_pru_r30[5] 
-            0x1a8 ( PIN_OUTPUT | MUX_MODE7 ) // (D13) mcasp0_axr1.pr1_pru0_pru_r30[6] 
-            0x1ac ( PIN_OUTPUT | MUX_MODE7 ) // (A14) mcasp0_ahclkx.pr1_pru0_pru_r30[7] 
-            0xf0 ( PIN_OUTPUT | MUX_MODE7 ) // (F17) mmc0_dat3.pr1_pru0_pru_r30[8] 
-            0xf4 ( PIN_OUTPUT | MUX_MODE7 ) // (F18) mmc0_dat2.pr1_pru0_pru_r30[9] 
-            0xf8 ( PIN_OUTPUT | MUX_MODE7 ) // (G15) mmc0_dat1.pr1_pru0_pru_r30[10] 
-            0xfc ( PIN_OUTPUT | MUX_MODE7 ) // (G16) mmc0_dat0.pr1_pru0_pru_r30[11] 
-            0x100 ( PIN_OUTPUT | MUX_MODE7 ) // (G17) mmc0_clk.pr1_pru0_pru_r30[12] 
-            0x104 ( PIN_OUTPUT | MUX_MODE7 ) // (G18) mmc0_cmd.pr1_pru0_pru_r30[13] 
-            0x30 ( PIN_OUTPUT | MUX_MODE7 ) // (T12) gpmc_ad12.pr1_pru0_pru_r30[14] 
-            0x34 ( PIN_OUTPUT | MUX_MODE7 ) // (R12) gpmc_ad13.pr1_pru0_pru_r30[15] 
+            0x190 ( PIN_OUTPUT | MUX_MODE7 ) /* (A13) mcasp0_aclkx.pr1_pru0_pru_r30[0] */
+            0x194 ( PIN_OUTPUT | MUX_MODE7 ) /* (B13) mcasp0_fsx.pr1_pru0_pru_r30[1] */
+            0x198 ( PIN_OUTPUT | MUX_MODE7 ) /* (D12) mcasp0_axr0.pr1_pru0_pru_r30[2] */
+            0x19c ( PIN_OUTPUT | MUX_MODE7 ) /* (C12) mcasp0_ahclkr.pr1_pru0_pru_r30[3] */
+            0x1a0 ( PIN_OUTPUT | MUX_MODE7 ) /* (B12) mcasp0_aclkr.pr1_pru0_pru_r30[4] */
+            0x1a4 ( PIN_OUTPUT | MUX_MODE7 ) /* (C13) mcasp0_fsr.pr1_pru0_pru_r30[5] */
+            0x1a8 ( PIN_OUTPUT | MUX_MODE7 ) /* (D13) mcasp0_axr1.pr1_pru0_pru_r30[6] */
+            0x1ac ( PIN_OUTPUT | MUX_MODE7 ) /* (A14) mcasp0_ahclkx.pr1_pru0_pru_r30[7] */
+            0xf0 ( PIN_OUTPUT | MUX_MODE7 ) /* (F17) mmc0_dat3.pr1_pru0_pru_r30[8] */
+            0xf4 ( PIN_OUTPUT | MUX_MODE7 ) /* (F18) mmc0_dat2.pr1_pru0_pru_r30[9] */
+            0xf8 ( PIN_OUTPUT | MUX_MODE7 ) /* (G15) mmc0_dat1.pr1_pru0_pru_r30[10] */
+            0xfc ( PIN_OUTPUT | MUX_MODE7 ) /* (G16) mmc0_dat0.pr1_pru0_pru_r30[11] */
+            0x100 ( PIN_OUTPUT | MUX_MODE7 ) /* (G17) mmc0_clk.pr1_pru0_pru_r30[12] */
+            0x104 ( PIN_OUTPUT | MUX_MODE7 ) /* (G18) mmc0_cmd.pr1_pru0_pru_r30[13] */
+            0x30 ( PIN_OUTPUT | MUX_MODE7 ) /* (T12) gpmc_ad12.pr1_pru0_pru_r30[14] */
+            0x34 ( PIN_OUTPUT | MUX_MODE7 ) /* (R12) gpmc_ad13.pr1_pru0_pru_r30[15] */
         >;
     };
-*/
+
     timer4_pins: timer4_pins {
         pinctrl-single,pins = <
             0x90 ( PIN_OUTPUT | MUX_MODE2 ) /* (R7) gpmc_advn_ale.timer4 */
@@ -512,7 +512,7 @@
     status = "okay";
     pinctrl-names = "default";
     pinctrl-0 = <&pru_stepper_pins>;   
-/*
+
     stepper_x{
         pin-names   = "Replic:pru-step_x", "Replic:pru-dir_x";      
         gpios       = <&gpio3 14 0
@@ -543,7 +543,7 @@
         gpios       = <&gpio2 28 0
                        &gpio2 29 0>; 
     };
-*/
+
 };
 
 &tscadc{            
