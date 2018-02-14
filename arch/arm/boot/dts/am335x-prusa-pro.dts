@@ -15,7 +15,7 @@
 / {
     model = "AM335x Prusa Pro";
     compatible = "ti,am335x-bone-black", "ti,am335x-bone", "ti,am33xx";
-
+/*
     gpio_keys {
         compatible = "gpio-keys";
         pinctrl-names = "default";
@@ -109,7 +109,7 @@
             gpio-key,wakeup;    
         };
     };
-
+*/
 
     pwm4: dmtimer-pwm@4 {
         compatible = "ti,omap-dmtimer-pwm";
@@ -202,62 +202,68 @@
             AM33XX_IOPAD(0x8ec, PIN_OUTPUT_PULLDOWN | MUX_MODE0)    /* lcd_ac_bias_en.lcd_ac_bias_en */
         >;
     };
-
+    
     ehrpwm1_pins: ehrpwm1_pins_default {
         pinctrl-single,pins = <
-            0x20 ( PIN_OUTPUT | MUX_MODE4 ) /* (U10) gpmc_ad8.ehrpwm2A */
-            0x24 ( PIN_OUTPUT | MUX_MODE4 ) /* (T10) gpmc_ad9.ehrpwm2B */
+            AM33XX_IOPAD(0x848, PIN_OUTPUT | MUX_MODE6 )    /* (U14) gpmc_a2.ehrpwm1A - HEAT-0 */
+            AM33XX_IOPAD(0x84c, PIN_OUTPUT | MUX_MODE6 )    /* (T14) gpmc_a3.ehrpwm1B - BED-HEAT */
         >;
     };
-
+    
     ehrpwm2_pins: ehrpwm2_pins_default {
         pinctrl-single,pins = <
-            0x48 ( PIN_OUTPUT | MUX_MODE6 ) /* (U14) gpmc_a2.ehrpwm1A */
-            0x4c ( PIN_OUTPUT | MUX_MODE6 ) /* (T14) gpmc_a3.ehrpwm1B */
+            AM33XX_IOPAD(0x820, PIN_OUTPUT | MUX_MODE4 )    /* (U10) gpmc_ad8.ehrpwm2A - FAN-1 */
+            AM33XX_IOPAD(0x824, PIN_OUTPUT | MUX_MODE4 )    /* (T10) gpmc_ad9.ehrpwm2B - FAN-0 */
         >;
     };
 
     spi0_pins: spi0_pins {
         pinctrl-single,pins = <
-            0x150 ( PIN_INPUT | MUX_MODE0 ) /* (A17) spi0_sclk.spi0_sclk */
-            0x154 ( PIN_INPUT | MUX_MODE0 ) /* (B17) spi0_d0.spi0_d0 */
-            0x158 ( PIN_INPUT | MUX_MODE0 ) /* (B16) spi0_d1.spi0_d1 */
-            0x15c ( PIN_OUTPUT | MUX_MODE0 ) /* (A16) spi0_cs0.spi0_cs0 */
-            0x160 ( PIN_OUTPUT | MUX_MODE0 ) /* (C15) spi0_cs1.spi0_cs1 */
+            AM33XX_IOPAD(0x950, PIN_INPUT | MUX_MODE0 )     // (A17) spi0_sclk.spi0_sclk
+            AM33XX_IOPAD(0x954, PIN_INPUT | MUX_MODE0 )     // (B17) spi0_d0.spi0_d0
+            AM33XX_IOPAD(0x958, PIN_INPUT | MUX_MODE0 )     // (B16) spi0_d1.spi0_d1
+            AM33XX_IOPAD(0x95c, PIN_OUTPUT | MUX_MODE0 )    // (A16) spi0_cs0.spi0_cs0
+            //spi0_cs1 used by mmc0_cd 
+            //0x160 ( PIN_OUTPUT | MUX_MODE0 )              // (C15) spi0_cs1.spi0_cs1
         >;
     };
-
+/*
     spi1_pins: spi1_pins {
         pinctrl-single,pins = <
-            0x164 ( PIN_INPUT | MUX_MODE4 ) /* (C18) eCAP0_in_PWM0_out.spi1_sclk */
-            0x168 ( PIN_INPUT | MUX_MODE4 ) /* (E18) uart0_ctsn.spi1_d0 */
-            0x16c ( PIN_INPUT | MUX_MODE4 ) /* (E17) uart0_rtsn.spi1_d1 */
-            0x178 ( PIN_INPUT | MUX_MODE4 ) /* (D18) uart1_ctsn.spi1_cs0 */
-            0x17c ( PIN_INPUT | MUX_MODE4 ) /* (D17) uart1_rtsn.spi1_cs1 */
+            0x164 ( PIN_INPUT | MUX_MODE4 )                 // (C18) eCAP0_in_PWM0_out.spi1_sclk
+            0x168 ( PIN_INPUT | MUX_MODE4 )                 // (E18) uart0_ctsn.spi1_d0
+            0x16c ( PIN_INPUT | MUX_MODE4 )                 // (E17) uart0_rtsn.spi1_d1
+            0x178 ( PIN_INPUT | MUX_MODE4 )                 // (D18) uart1_ctsn.spi1_cs0
+            0x17c ( PIN_INPUT | MUX_MODE4 )                 // (D17) uart1_rtsn.spi1_cs1
         >;
     };
-
-    pru_stepper_pins: pru_pruss11_pins {
+*/
+    pru_stepper_pins: pru_pruss_pins {
         pinctrl-single,pins = <
-            0x190 ( PIN_OUTPUT | MUX_MODE5 ) /* (A13) mcasp0_aclkx.pr1_pru0_pru_r30[0] */
-            0x194 ( PIN_OUTPUT | MUX_MODE5 ) /* (B13) mcasp0_fsx.pr1_pru0_pru_r30[1] */
-            0x198 ( PIN_OUTPUT | MUX_MODE5 ) /* (D12) mcasp0_axr0.pr1_pru0_pru_r30[2] */
-            0x19c ( PIN_OUTPUT | MUX_MODE5 ) /* (C12) mcasp0_ahclkr.pr1_pru0_pru_r30[3] */
-            0x1a0 ( PIN_OUTPUT | MUX_MODE5 ) /* (B12) mcasp0_aclkr.pr1_pru0_pru_r30[4] */
-            0x1a4 ( PIN_OUTPUT | MUX_MODE5 ) /* (C13) mcasp0_fsr.pr1_pru0_pru_r30[5] */
-            0x1a8 ( PIN_OUTPUT | MUX_MODE5 ) /* (D13) mcasp0_axr1.pr1_pru0_pru_r30[6] */
-            0x1ac ( PIN_OUTPUT | MUX_MODE5 ) /* (A14) mcasp0_ahclkx.pr1_pru0_pru_r30[7] */
-            //0xf0 ( PIN_OUTPUT | MUX_MODE5 ) /* (F17) mmc0_dat3.pr1_pru0_pru_r30[8] */
-            //0xf4 ( PIN_OUTPUT | MUX_MODE5 ) /* (F18) mmc0_dat2.pr1_pru0_pru_r30[9] */
-            //0xf8 ( PIN_OUTPUT | MUX_MODE5 ) /* (G15) mmc0_dat1.pr1_pru0_pru_r30[10] */
-            //0xfc ( PIN_OUTPUT | MUX_MODE5 ) /* (G16) mmc0_dat0.pr1_pru0_pru_r30[11] */
-            //0x100 ( PIN_OUTPUT | MUX_MODE5 ) /* (G17) mmc0_clk.pr1_pru0_pru_r30[12] */
-            //0x104 ( PIN_OUTPUT | MUX_MODE5 ) /* (G18) mmc0_cmd.pr1_pru0_pru_r30[13] */
-            //0x30 ( PIN_OUTPUT | MUX_MODE6 ) /* (T12) gpmc_ad12.pr1_pru0_pru_r30[14] */
-            //0x34 ( PIN_OUTPUT | MUX_MODE6 ) /* (R12) gpmc_ad13.pr1_pru0_pru_r30[15] */
-            /*0x38 ( PIN_INPUT | MUX_MODE6 )*/ /* (V13) gpmc_ad14.pr1_pru0_pru_r31[14] */
-            /*0x3c ( PIN_INPUT | MUX_MODE6 )*/ /* (U13) gpmc_ad15.pr1_pru0_pru_r31[15] */
-            //0x1b4 ( PIN_INPUT | MUX_MODE5 ) /* (D14) xdma_event_intr1.pr1_pru0_pru_r31[16] */
+            AM33XX_IOPAD(0x990, PIN_OUTPUT | MUX_MODE5 )    // (A13) mcasp0_aclkx.pr1_pru0_pru_r30[0] - X-STEP
+            AM33XX_IOPAD(0x994, PIN_OUTPUT | MUX_MODE5 )    // (B13) mcasp0_fsx.pr1_pru0_pru_r30[1] - X-DIR
+            AM33XX_IOPAD(0x998, PIN_OUTPUT | MUX_MODE5 )    // (D12) mcasp0_axr0.pr1_pru0_pru_r30[2] - Y-STEP
+            AM33XX_IOPAD(0x99c, PIN_OUTPUT | MUX_MODE5 )    // (C12) mcasp0_ahclkr.pr1_pru0_pru_r30[3] - Y-DIR
+            AM33XX_IOPAD(0x9a0, PIN_OUTPUT | MUX_MODE5 )    // (B12) mcasp0_aclkr.pr1_pru0_pru_r30[4] - Z-STEP
+            AM33XX_IOPAD(0x9a4, PIN_OUTPUT | MUX_MODE5 )    // (C13) mcasp0_fsr.pr1_pru0_pru_r30[5] - Z-DIR
+            AM33XX_IOPAD(0x830, PIN_OUTPUT | MUX_MODE6 )    // (T12) gpmc_ad12.pr1_pru0_pru_r30[14] - E0-STEP
+            AM33XX_IOPAD(0x834, PIN_OUTPUT | MUX_MODE6 )    // (R12) gpmc_ad13.pr1_pru0_pru_r30[15] - E0-DIR
+            
+            AM33XX_IOPAD(0x838, PIN_INPUT | MUX_MODE6 )     // (V13) gpmc_ad14.pr1_pru0_pru_r31[14] - E0_DIAG
+            AM33XX_IOPAD(0x83c, PIN_INPUT | MUX_MODE6 )     // (U13) gpmc_ad15.pr1_pru0_pru_r31[15] - Z-MIN
+            AM33XX_IOPAD(0x984, PIN_INPUT | MUX_MODE6 )     // (D15) uart1_txd.pr1_pru0_pru_r31[16] - Y_DIAG 
+            AM33XX_IOPAD(0x9a8, PIN_INPUT | MUX_MODE6 )     // (D13) mcasp0_axr1.pr1_pru0_pru_r31[6] - Z_DIAG
+            AM33XX_IOPAD(0x9ac, PIN_INPUT | MUX_MODE6 )     // (A14) mcasp0_ahclkx.pr1_pru0_pru_r31[7] - X_DIAG 
+            
+            //0xf0 ( PIN_OUTPUT | MUX_MODE5 )               // (F17) mmc0_dat3.pr1_pru0_pru_r30[8] */
+            //0xf4 ( PIN_OUTPUT | MUX_MODE5 )               // (F18) mmc0_dat2.pr1_pru0_pru_r30[9] */
+            //0xf8 ( PIN_OUTPUT | MUX_MODE5 )               // (G15) mmc0_dat1.pr1_pru0_pru_r30[10] */
+            //0xfc ( PIN_OUTPUT | MUX_MODE5 )               // (G16) mmc0_dat0.pr1_pru0_pru_r30[11] */
+            //0x100 ( PIN_OUTPUT | MUX_MODE5 )              // (G17) mmc0_clk.pr1_pru0_pru_r30[12] */
+            //0x104 ( PIN_OUTPUT | MUX_MODE5 )              // (G18) mmc0_cmd.pr1_pru0_pru_r30[13] */
+            //0x38 ( PIN_INPUT | MUX_MODE6 )                // (V13) gpmc_ad14.pr1_pru0_pru_r31[14] */
+            //0x3c ( PIN_INPUT | MUX_MODE6 )                // (U13) gpmc_ad15.pr1_pru0_pru_r31[15] */
+            //0x1b4 ( PIN_INPUT | MUX_MODE5 )               // (D14) xdma_event_intr1.pr1_pru0_pru_r31[16] */
         >;
     };
 /*
@@ -284,40 +290,42 @@
 */
     timer4_pins: timer4_pins {
         pinctrl-single,pins = <
-            0x90 ( PIN_OUTPUT | MUX_MODE2 ) /* (R7) gpmc_advn_ale.timer4 */
+            AM33XX_IOPAD(0x890, PIN_OUTPUT | MUX_MODE2 )    /* (R7) gpmc_advn_ale.timer4 */
         >;
     };
-
+    
     timer5_pins: timer5_pins {
         pinctrl-single,pins = <
-             0x9c ( PIN_OUTPUT | MUX_MODE2 ) /* (T6) gpmc_be0n_cle.timer5 */
+            AM33XX_IOPAD(0x89c, PIN_OUTPUT | MUX_MODE2 )    /* (T6) gpmc_be0n_cle.timer5 */
         >;
     };
+    
     timer6_pins: timer6_pins {
         pinctrl-single,pins = <
-            0x98 ( PIN_OUTPUT | MUX_MODE2 ) /* (U6) gpmc_wen.timer6 */
+            AM33XX_IOPAD(0x898, PIN_OUTPUT | MUX_MODE2 )    /* (U6) gpmc_wen.timer6 */
         >;
     };
+    
     timer7_pins: timer7_pins {
         pinctrl-single,pins = <
-             0x94 ( PIN_OUTPUT | MUX_MODE2 ) /* (T7) gpmc_oen_ren.timer7 */
-        >;
-    };
-
-    i2c1_pins: i2c1_pins {
-        pinctrl-single,pins = <
-            0x184 ( PIN_INPUT | MUX_MODE3 ) /* (D15) uart1_txd.I2C1_SCL */
-            0x180 ( PIN_INPUT | MUX_MODE3 ) /* (D16) uart1_rxd.I2C1_SDA */
-        >;
-    };
-
-    uart4_pins: pinmux_uart4_pins {
-        pinctrl-single,pins = <
-            0x70 ( PIN_INPUT | MUX_MODE6 ) /* (T17) gpmc_wait0.uart4_rxd */
-            0x74 ( PIN_OUTPUT | MUX_MODE6 ) /* (U17) gpmc_wpn.uart4_txd */
+            AM33XX_IOPAD(0x894, PIN_OUTPUT | MUX_MODE2 )    /* (T7) gpmc_oen_ren.timer7 */
         >;
     };
 /*
+    i2c1_pins: i2c1_pins {
+        pinctrl-single,pins = <
+            0x184 ( PIN_INPUT | MUX_MODE3 )                 // (D15) uart1_txd.I2C1_SCL
+            0x180 ( PIN_INPUT | MUX_MODE3 )                 // (D16) uart1_rxd.I2C1_SDA
+        >;
+    };
+    
+    uart4_pins: pinmux_uart4_pins {
+        pinctrl-single,pins = <
+            0x70 ( PIN_INPUT | MUX_MODE6 )                  // (T17) gpmc_wait0.uart4_rxd
+            0x74 ( PIN_OUTPUT | MUX_MODE6 )                 // (U17) gpmc_wpn.uart4_txd
+        >;
+    };
+
     cpsw_default: cpsw_default {
         pinctrl-single,pins = <
             // Slave 1 
@@ -334,37 +342,42 @@
             //0x10c (PIN_INPUT_PULLDOWN | MUX_MODE7)
         >;
     };
-*/
 
     stepper_fault_pins: pinmux_stepper_fault_pins{
         pinctrl-single,pins = <
-            0x2c  ( PIN_INPUT | MUX_MODE7 ) // FAULT X
-            0x88  ( PIN_INPUT | MUX_MODE7 ) // FAULT Y
-            0x40  ( PIN_INPUT | MUX_MODE7 ) // FAULT Z
-            0x8c  ( PIN_INPUT | MUX_MODE7 ) // FAULT E
-            0x144 ( PIN_INPUT | MUX_MODE7 ) // FAULT H
-            0x28  ( PIN_INPUT | MUX_MODE7 ) // FAULT A
+            0x2c  ( PIN_INPUT | MUX_MODE7 )     // FAULT X
+            0x88  ( PIN_INPUT | MUX_MODE7 )     // FAULT Y
+            0x40  ( PIN_INPUT | MUX_MODE7 )     // FAULT Z
+            0x8c  ( PIN_INPUT | MUX_MODE7 )     // FAULT E
+            0x144 ( PIN_INPUT | MUX_MODE7 )     // FAULT H
+            0x28  ( PIN_INPUT | MUX_MODE7 )     // FAULT A
         >;
     };
 
     end_stop_pins: pinmux_end_stop_pins{
         pinctrl-single,pins = <
-            0x78 ( PIN_INPUT | MUX_MODE7 ) // End stop X1  = GPIO3_21
-            0x44 ( PIN_INPUT | MUX_MODE7 ) // End stop X2  = GPIO0_30
-            0x6c ( PIN_INPUT | MUX_MODE7 ) // End stop Y1  = GPIO1_27
-            0x7c ( PIN_INPUT | MUX_MODE7 ) // End stop Z1  = GPIO0_31
-            0x38 ( PIN_INPUT | MUX_MODE7 ) // End stop Z2  = GPIO0_4
-            0x3c ( PIN_INPUT | MUX_MODE7 ) // End stop Y2  = GPIO3_17
+            0x78 ( PIN_INPUT | MUX_MODE7 )      // End stop X1  = GPIO3_21
+            0x44 ( PIN_INPUT | MUX_MODE7 )      // End stop X2  = GPIO0_30
+            0x6c ( PIN_INPUT | MUX_MODE7 )      // End stop Y1  = GPIO1_27
+            0x7c ( PIN_INPUT | MUX_MODE7 )      // End stop Z1  = GPIO0_31
+            0x38 ( PIN_INPUT | MUX_MODE7 )      // End stop Z2  = GPIO0_4
+            0x3c ( PIN_INPUT | MUX_MODE7 )      // End stop Y2  = GPIO3_17
         >;
     };
 
-
     gpio0_pins: mygpio0_pins_default {
         pinctrl-single,pins = <
-            0x21c ( PIN_INPUT | MUX_MODE7 ) /* (F16) USB0_DRVVBUS.gpio0[18] */
-            0x28 ( PIN_INPUT | MUX_MODE7 ) /* (T11) gpmc_ad10.gpio0[26] */
-            0x2c ( PIN_INPUT | MUX_MODE7 ) /* (U12) gpmc_ad11.gpio0[27] */
-            0x144 ( PIN_INPUT | MUX_MODE7 ) /* (H18) rmii1_refclk.gpio0[29] */
+            0x21c ( PIN_INPUT | MUX_MODE7 )     // (F16) USB0_DRVVBUS.gpio0[18]
+            0x28 ( PIN_INPUT | MUX_MODE7 )      // (T11) gpmc_ad10.gpio0[26]
+            0x2c ( PIN_INPUT | MUX_MODE7 )      // (U12) gpmc_ad11.gpio0[27]
+            0x144 ( PIN_INPUT | MUX_MODE7 )     // (H18) rmii1_refclk.gpio0[29]
+        >;
+    };
+*/    
+    gpio0_pins: gpio0_pins_default {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x828, PIN_INPUT | MUX_MODE7 )     // (T11) gpmc_ad10.gpio0[26] - TACH_1
+            AM33XX_IOPAD(0x82c, PIN_INPUT | MUX_MODE7 )     // (U12) gpmc_ad11.gpio0[27] - TACH_0
         >;
     };
 /* some beaglebone stuff
@@ -375,14 +388,14 @@
     };
 */
 };
-
+/*
 &uart4 {
     pinctrl-names = "default";
     pinctrl-0 = <&uart4_pins>;
     status = "okay";
 };
 
-/*
+
 &usb0 {
     status = "okay";
     dr_mode = "peripheral";
@@ -390,7 +403,8 @@
     interrupt-names = "mc", "vbus";
 };
 */
-// ????
+
+
 &gpio0{
     status = "okay";
 };
@@ -419,14 +433,14 @@
         };
     };
 };
-
+/*
 &i2c1{
     pinctrl-names = "default";
     pinctrl-0 = <&i2c1_pins>;
     status = "okay";
     clock-frequency = <400000>;
 };
-
+*/
 &epwmss1{
     status = "okay";
 };
@@ -452,14 +466,17 @@
     status = "okay";
     ti,timer-pwm;
 };
+
 &timer5{
     status = "okay";        
     ti,timer-pwm;
 };
+
 &timer6{
     status = "okay";        
     ti,timer-pwm;
 };
+
 &timer7{
     status = "okay";        
     ti,timer-pwm;
@@ -477,6 +494,7 @@
         reg           = <0>;
         spi-max-frequency = <4000000>;
     };
+    /* we use only spi0_cs0 because spi0_cs1 is taken
     aux_control{
         #address-cells    = <1>;
         #size-cells       = <0>;
@@ -484,8 +502,9 @@
         reg           = <1>;
         spi-max-frequency = <16000000>;
     };
+    */
 };
-
+/*
 &spi1{
     status = "okay";
     pinctrl-names = "default";
@@ -507,17 +526,18 @@
         spi-max-frequency = <16000000>;
     };
 };
-
+*/
 &pruss{
     status = "okay";
     pinctrl-names = "default";
     pinctrl-0 = <&pru_stepper_pins>;   
-/*
+
     stepper_x{
-        pin-names   = "Replic:pru-step_x", "Replic:pru-dir_x";      
+        pin-names   = "PRU-X-STEP", "PRU-X-DIR";      
         gpios       = <&gpio3 14 0
                        &gpio3 15 0>; 
-    };          
+    };
+/*    
     stepper_y{
         pin-names   = "Replic:pru-step_y", "Replic:pru-dir_y";      
         gpios       =<&gpio3 16 0
